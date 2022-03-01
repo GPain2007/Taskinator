@@ -33,8 +33,7 @@ var taskFormHandler = function (event) {
       type: taskTypeInput,
       status: "to do",
     };
-    console.log(taskDataObj);
-    console.log(taskDataObj.status);
+
     createTaskEl(taskDataObj);
   }
   formEl.reset();
@@ -201,6 +200,19 @@ var taskStatusChangeHandler = function (event) {
 };
 var saveTasks = function () {
   localStorage.setItem("tasks", JSON.stringify(tasks));
+};
+var loadTasks = function () {
+  var savedTasks = localStorage.getItem("tasks");
+
+  if (!savedTasks) {
+    return false;
+  }
+
+  savedTasks = JSON.parse(savedTasks);
+  for (var i = 0; i < savedTasks.length; i++) {
+    createTaskEl(savedTasks[i]);
+    console.log(createTaskEl);
+  }
 };
 
 /*buttonEl.addEventListener("click", taskFormHandler);*/
